@@ -1,25 +1,22 @@
 package example.collection;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Waitress {
 
-    Menu pancakeHouseMenu;
-    Menu dinerMenu;
+    ArrayList<Menu> menus;
 
-    public Waitress(Menu pancakeHouseMenu, Menu dinerMenu) {
-        this.pancakeHouseMenu = pancakeHouseMenu;
-        this.dinerMenu = dinerMenu;
+    public Waitress(ArrayList<Menu> menus) {
+        this.menus = menus;
     }
 
     public void printMenu() {
-        Iterator<MenuItem> pancakeIterator = pancakeHouseMenu.createIterator();
-        Iterator<MenuItem> dinerIterator = dinerMenu.createIterator();
-
-        System.out.println("MENU\n----\nBREAKFAST");
-        printMenu(pancakeIterator);
-        System.out.println("\nLUNCH");
-        printMenu(dinerIterator);
+        Iterator<Menu> menuIterator = menus.iterator();
+        while (menuIterator.hasNext()) {
+            Menu menu = (Menu) menuIterator.next();
+            printMenu(menu.createIterator());
+        }
     }
 
     private void printMenu(Iterator<MenuItem> iterator) {
@@ -29,6 +26,7 @@ public class Waitress {
             System.out.print(menuItem.getPrice() + " -- ");
             System.out.println(menuItem.getDescription());
         }
+        System.out.println("---------------");
     }
     
 }
